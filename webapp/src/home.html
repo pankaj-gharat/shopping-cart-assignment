@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Verdana, sans-serif;
+      }
+      .mySlides {
+        display: none;
+      }
+      .imgcarouselImage {
+        vertical-align: middle;
+      }
+
+      /* Slideshow container */
+      .slideshow-container {
+        max-width: 1000px;
+        position: relative;
+        margin: auto;
+      }
+
+      /* Caption text */
+      .text {
+        color: #f2f2f2;
+        font-size: 15px;
+        padding: 8px 12px;
+        position: absolute;
+        bottom: 8px;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Number text (1/3 etc) */
+      .numbertext {
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
+      }
+
+      /* The dots/bullets/indicators */
+      .dot {
+        height: 10px;
+        width: 10px;
+        margin: 0 2px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+        transition: background-color 0.6s ease;
+      }
+
+      .active {
+        background-color: #717171;
+      }
+
+      /* Fading animation */
+      .fade {
+        -webkit-animation-name: fade;
+        -webkit-animation-duration: 1.5s;
+        animation-name: fade;
+        animation-duration: 1.5s;
+      }
+
+      @-webkit-keyframes fade {
+        from {
+          opacity: 0.4;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes fade {
+        from {
+          opacity: 0.4;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      /* On smaller screens, decrease text size */
+      @media only screen and (max-width: 300px) {
+        .text {
+          font-size: 11px;
+        }
+      }
+
+      /* navbar design */
+
+      .Header {
+        padding: 15px;
+        box-shadow: 0px 15px 10px -15px #111;
+      }
+      .categoryImage {
+        width: 25%;
+        height: auto;
+        object-fit: cover;
+      }
+
+      @media only screen and (max-width: 480px) {
+        .categoryImage {
+          object-fit: scale-down;
+        }
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-around;
+      }
+      .btn-category {
+        background-color: rgb(240, 23, 95);
+        padding: 12px 50px;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+      }
+
+      /* footer view style */
+
+      footer {
+        width: 100%;
+        display: flex;
+        bottom: 0;
+        left: 0;
+        background: darkgrey;
+        justify-content: space-around;
+      }
+
+      /* Navbar Css  */
+      .logo {
+        max-width: 100%;
+        display: block;
+        height: auto;
+        padding: 10px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+      .addCart {
+        width: 50px;
+      }
+
+      /* Create two equal columns that floats next to each other */
+      .navigation-col {
+        float: left;
+        width: 50%;
+        padding: 5px;
+      }
+
+      /* Clear floats after the columns */
+      .navigation-row:after:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+      .cartNumber {
+        padding-top: 15px;
+        padding-left: 0px;
+      }
+
+      header .navigation {
+        display: flex;
+        align-items: center;
+        /* position: fixed; */
+        min-height: 12vh;
+        min-width: 100%;
+        z-index: 10;
+        background: #fff;
+        justify-content: space-around;
+        box-shadow: 0px 15px 10px -15px #111;
+      }
+
+      header .navigation .menu-list {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: auto 20px auto 0;
+      }
+
+      header .navigation .menu-list li a {
+        color: #6b6f72;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: color 1s ease, border 1s ease;
+        text-decoration: none;
+        padding-left: 20px;
+        font-weight: 600;
+      }
+
+      /* Navbar media Query for mobile view */
+      @media only screen and (max-width: 600px) {
+        body {
+          background-color: lightblue;
+        }
+
+        header .navigation .menu-list {
+          display: none;
+        }
+        .navLogin {
+          display: none;
+        }
+        .logoImage {
+          width: 60%;
+        }
+        .cartDiv {
+          width: 100%;
+        }
+      }
+
+      /* modal css */
+
+      .modal-window {
+        position: fixed;
+        background-color: rgba(255, 255, 255, 0.25);
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 999;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: all 0.3s;
+      }
+      .modal-window:target {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-window > div {
+        width: 500px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 2em;
+        background: rgb(212, 210, 210);
+      }
+      .modal-window header {
+        font-weight: bold;
+      }
+      .modal-window h1 {
+        font-size: 150%;
+        margin: 0 0 15px;
+      }
+
+      .modal-close {
+        color: #aaa;
+        line-height: 50px;
+        font-size: 80%;
+        /* position: absolute;
+  right: 0;
+  text-align: center; */
+        top: 0;
+        width: 70px;
+        text-decoration: none;
+      }
+      .modal-close:hover {
+        color: black;
+      }
+
+      /* Demo Styles */
+
+      a {
+        color: inherit;
+      }
+
+      .modal-window > div {
+        border-radius: 1rem;
+      }
+
+      .modal-window div:not(:last-of-type) {
+        margin-bottom: 15px;
+      }
+
+      small {
+        color: lightgray;
+      }
+
+      .modal-header {
+        display: flex;
+        background-color: black;
+        width: 100%;
+        justify-content: space-between;
+      }
+      .modal-footer {
+        background-color: rgb(240, 23, 95);
+        padding: 12px 55px;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 10px;
+        margin: 4px 2px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .modal-footer-text {
+        display: flex;
+        justify-content: space-between;
+        font-size: small;
+      }
+      .modal-empty-content {
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <header style="padding-bottom: 20px">
+      <nav class="navigation">
+        <!-- Logo -->
+        <div class="logo">
+          <img
+            src="./static/images/logo.png"
+            alt="sabkaapna"
+            srcset=""
+            class="logoImage"
+          />
+        </div>
+
+        <!-- Navigation -->
+        <ul class="menu-list">
+          <li><a href="#">Home</a></li>
+          <li><a href="/src/products.html">Products</a></li>
+        </ul>
+
+        <div class="navigation-row">
+          <div class="navigation-col navLogin">
+            <a href="/src/login.html" style="color: #6b6f72">Sign In</a>
+          </div>
+          <div class="navigation-col navLogin">
+            <a href="/src/signUp.html" style="color: #6b6f72">Register</a>
+          </div>
+
+          <div class="navigation-row cartDiv">
+            <div class="cartView">
+              <a href="#open-modal">
+                <div class="navigation-col">
+                  <img
+                    class="addCart"
+                    src="./static/images/cart.svg"
+                    alt="addtocart"
+                    srcset=""
+                  />
+                </div>
+              </a>
+              <div class="navigation-col cartNumber">0 Items</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="slideshow-container">
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img
+          class="carouselImage"
+          src="./carousel/offer1.jpg"
+          style="width: 100%"
+        />
+        <div class="text">Caption Text</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img
+          class="carouselImage"
+          src="./carousel/offer2.jpg"
+          style="width: 100%"
+        />
+        <div class="text">Caption Two</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img
+          class="carouselImage"
+          src="./carousel/offer3.jpg"
+          style="width: 100%"
+        />
+        <div class="text">Caption Three</div>
+      </div>
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img
+          class="carouselImage"
+          src="./carousel/offer4.jpg"
+          style="width: 100%"
+        />
+        <div class="text">Caption Four</div>
+      </div>
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img
+          class="carouselImage"
+          src="./carousel/offer5.jpg"
+          style="width: 100%"
+        />
+        <div class="text">Caption Five</div>
+      </div>
+    </div>
+    <br />
+
+    <div style="text-align: center">
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+    <br />
+    <section>
+      <div class="Header">
+        <div class="container">
+          <img
+            class="categoryImage"
+            src="./images/category/fruits.png"
+            alt="firstProduct"
+          />
+          <div>
+            <h1>Fruits & Vegetables</h1>
+            <span><h5>A varriety of Vegetables & ...</h5></span>
+            <button class="btn-category">Explore products</button>
+          </div>
+        </div>
+      </div>
+      <div class="Header">
+        <div class="container">
+          <div>
+            <h1>Fruits & Vegetables</h1>
+            <span><h5>A varriety of Vegetables & ...</h5></span>
+            <button class="btn-category">Explore products</button>
+          </div>
+          <img
+            class="categoryImage"
+            src="./images/category/bakery.png"
+            alt="secondProduct"
+          />
+        </div>
+      </div>
+      <div class="Header">
+        <div class="container">
+          <img
+            class="categoryImage"
+            src="./images/category/beverages.png"
+            alt="thirdProduct"
+          />
+          <div>
+            <h1>Fruits & Vegetables</h1>
+            <span><h5>A varriety of Vegetables & ...</h5></span>
+            <button class="btn-category">Explore products</button>
+          </div>
+        </div>
+      </div>
+      <div class="Header">
+        <div class="container">
+          <div>
+            <h1>Fruits & Vegetables</h1>
+            <span><h5>A varriety of Vegetables & ...</h5></span>
+            <button class="btn-category">Explore products</button>
+          </div>
+          <img
+            class="categoryImage"
+            src="./images/category/beauty.png"
+            alt="fourProduct"
+          />
+        </div>
+      </div>
+      <div class="Header">
+        <div class="container">
+          <img
+            class="categoryImage"
+            src="./images/category/baby.png"
+            alt="babyProduct"
+          />
+          <div>
+            <h1>Fruits & Vegetables</h1>
+            <span><h5>A varriety of Vegetables & ...</h5></span>
+            <button class="btn-category">Explore products</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <h5>Copyright@2021-2022 Sabka Bazzar Grocerries Pvt Ltd</h5>
+    </footer>
+
+    <div id="open-modal" class="modal-window">
+      <div>
+        <header class="modal-header">
+          <h1 style="color: #fff; margin: 0; padding: 15px; font-size: 15px">
+            My Cart(1 item)
+          </h1>
+          <a href="#" title="Close" class="modal-close">Close</a>
+        </header>
+
+        <div class="modal-body" style="height: fit-content">
+          <div class="modal-empty-content">
+            <h1>No Items in Your Cart</h1>
+            <p>Your Favourite Item Just Click Away</p>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <!-- <div class="modal-footer-text"> Procced To CheckOut<span>
+          <span>Rs 786 &nbsp ></div> -->
+          <div class="modal-footer-text" style="justify-content: center">
+            Start Shopping
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var slideIndex = 0;
+      showSlides();
+
+      function showSlides() {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {
+          slideIndex = 1;
+        }
+        for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        setTimeout(showSlides, 2000); // Change image every 2 seconds
+      }
+    </script>
+  </body>
+</html>

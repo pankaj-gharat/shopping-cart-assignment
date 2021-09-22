@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="text/javascript" src="products.js"></script>
+  </head>
+  <body>
+    <header style="padding-bottom: 20px">
+      <nav class="navigation">
+        <!-- Logo -->
+        <div class="logo">
+          <img
+            src="./static/images/logo.png"
+            alt="sabkaapna"
+            srcset=""
+            class="logoImage"
+          />
+        </div>
+
+        <!-- Navigation -->
+        <ul class="menu-list">
+          <li><a href="/src/home.html">Home</a></li>
+          <li><a href="/src/products.html">Products</a></li>
+        </ul>
+
+        <div class="navigation-row">
+          <div class="navigation-col navLogin">
+            <a href="/src/login.html" style="color: #6b6f72">Sign In</a>
+          </div>
+          <div class="navigation-col navLogin">
+            <a href="/src/signUp.html" style="color: #6b6f72">Register</a>
+          </div>
+
+          <div class="navigation-row cartDiv">
+            <div class="cartView">
+              <a href="#open-modal">
+                <div class="navigation-col">
+                  <img
+                    class="addCart"
+                    src="./static/images/cart.svg"
+                    alt="addtocart"
+                    srcset=""
+                  />
+                </div>
+              </a>
+              <div class="navigation-col cartNumber">0 Items</div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="tabordion">
+      <section id="section1">
+        <input type="radio" name="sections" id="option1" checked />
+        <label for="option1">Fruits & Vegetables</label>
+        <article>
+          <div class="productContainer" id="theGrocerryList"></div>
+        </article>
+      </section>
+      <section id="section2">
+        <input type="radio" name="sections" id="option2" />
+        <label for="option2">Bakery Cakes & Dairy</label>
+        <article>
+          <div class="productContainer" id="theBakeryList"></div>
+        </article>
+      </section>
+      <section id="section3">
+        <input type="radio" name="sections" id="option3" />
+        <label for="option3">Beverages</label>
+        <article>
+          <div class="productContainer" id="theBeveragesList"></div>
+        </article>
+      </section>
+      <section id="section4">
+        <input type="radio" name="sections" id="option4" />
+        <label for="option4">Beauty & Hygiene</label>
+        <article>
+          <div class="productContainer" id="theBeautyList"></div>
+        </article>
+      </section>
+      <section id="section5">
+        <input type="radio" name="sections" id="option5" />
+        <label for="option5">Baby Care</label>
+        <article>
+          <div class="productContainer" id="theBabyCareList"></div>
+        </article>
+      </section>
+    </div>
+
+    <div id="open-modal" class="modal-window">
+      <div>
+        <header class="modal-header">
+          <h1 style="color: #fff; margin: 0; padding: 15px; font-size: 15px">
+            My Cart(1 item)
+          </h1>
+          <a href="#" title="Close" class="modal-close">Close</a>
+        </header>
+
+        <div class="modal-body" style="height: fit-content">
+          <div class="modal-empty-content">
+            <h1>No Items in Your Cart</h1>
+            <p>Your Favourite Item Just Click Away</p>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <!-- <div class="modal-footer-text"> Procced To CheckOut<span>
+            <span>Rs 786 &nbsp ></div> -->
+          <div class="modal-footer-text" style="justify-content: center">
+            Start Shopping
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
